@@ -12,7 +12,7 @@
 
 static const char *TAG = "SMART_ATTENDANCE";
 
-#define AP_SSID          "CLASSROOM_ATTENDANCE_AP"
+#define AP_SSID          "CLASSROOM_ATTENDANCE_0183"
 #define AP_PASS          "12345678"
 #define RSSI_THRESHOLD   -60
 
@@ -27,7 +27,7 @@ static student_record_t s_records[5];
 static int s_student_count = 0;
 
 static esp_err_t http_attendance_html_handler(httpd_req_t *req) {
-    char resp[1024];
+    char resp[2048];
     int len = snprintf(resp, sizeof(resp),
         "<html><head><meta name='viewport' content='width=device-width, initial-scale=1'>"
         "<style>body{font-family:Arial;text-align:center;background:#f4f4f9;padding:20px;}"
@@ -44,7 +44,7 @@ static esp_err_t http_attendance_html_handler(httpd_req_t *req) {
         "<table><tr><th>Device MAC</th><th>RSSI (dBm)</th><th>Proximity Status</th></tr>");
 
     for (int i = 0; i < s_student_count; i++) {
-        char status_str[32];
+        char status_str[128];
         if (s_records[i].rssi >= RSSI_THRESHOLD) {
             snprintf(status_str, sizeof(status_str), "<font color='green'><b>NEAR (Valid)</b></font>");
         } else {
