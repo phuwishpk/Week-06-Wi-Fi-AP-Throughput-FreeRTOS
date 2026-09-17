@@ -19,10 +19,10 @@ _(บันทึกข้อมูลจริงจากการทดสอ
 
 ---
 
-### 1.2 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.2 Forensic Serial Monitor Log
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.1</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.1</b></summary>
 
 ```text
 I (516) main_task: Started on CPU0
@@ -117,10 +117,10 @@ I (22386) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.
 
 ---
 
-### 1.2 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.2 Forensic Serial Monitor Log
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.2</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.2</b></summary>
 
 ```text
 ets Jul 29 2019 12:21:46
@@ -366,10 +366,10 @@ _(วัดค่าจากพอร์ต Serial ขณะบอร์ด ESP
 
 ---
 
-### 1.2 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.2 Forensic Serial Monitor Log
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.3</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.3</b></summary>
 
 ```text
 ets Jul 29 2019 12:21:46
@@ -593,10 +593,10 @@ _(หน้า Dashboard แสดงทศนิยม 1 ตำแหน่ง�
 
 ---
 
-### 1.4 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.4 Forensic Serial Monitor Log
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.4</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.4</b></summary>
 
 ```text
 I (514) main_task: Calling app_main()
@@ -769,10 +769,10 @@ _หมายเหตุ:_
 
 ---
 
-### 1.3 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.3 Forensic Serial Monitor Log
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.5</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.5</b></summary>
 
 ```text
 I (513) main_task: Calling app_main()
