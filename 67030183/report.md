@@ -319,6 +319,7 @@ I (23390) CLIENT_PROFILER: All 5 Tx Power Benchmark levels completed successfull
 1. **พฤติกรรมความแรงสัญญาณ (RSSI):** เนื่องจากบอร์ดทดลองทั้งสอง (Node A และ Node B) วางอยู่ใกล้กันบนโต๊ะทดลอง (Short-range Near Field) ค่า RSSI ที่อ่านได้จึงอยู่ในระดับแรงมากใกล้เคียง $0\text{ dBm}$ ถึง $-2\text{ dBm}$ ตลอดการทดลอง
 2. **ความสัมพันธ์ของ Throughput:** ความเร็ว Throughput ของโปรโตคอล TCP ผันแปรตามความหนาแน่นของการแย่งชิงช่องสัญญาณคลื่นวิทยุ (Channel Contention) และเวลาหน่วงของการส่งตอบรับ ACK
 3. **ข้อสังเกต:** เมื่อกำลังส่ง Tx Power อยู่ในช่วง $2\text{ dBm} - 10\text{ dBm}$ สัญญาณรบกวนต่ำ สื่อสารได้รวดเร็วความเร็วสูงถึง $1433 - 1533\text{ Kbps}$
+4. **จุด Threshold RSSI (ความเร็วลดลง > 50%):** เนื่องจากข้อมูลการทดลองระยะใกล้ได้ค่า RSSI เกาะกลุ่มกันที่ $0\text{ dBm}$ ถึง $-2\text{ dBm}$ แต่มีความเร็วที่ผันผวนสูงมาก การประเมินด้วยเส้นแนวโน้ม (Regression) จึงได้สมการที่มีความคลาดเคลื่อน ส่งผลให้ไม่สามารถคำนวณจุด Threshold แบบ Logarithmic ตามทฤษฎีจากชุดข้อมูลทดลองนี้ได้โดยตรง (ตามทฤษฎีจุดที่ความเร็วร่วง 50% มักจะอยู่ในช่วงประมาณ $-75$ ถึง $-80\text{ dBm}$)
 
 ---
 
@@ -584,7 +585,17 @@ I (9405) FORENSIC_STACK:   -> NetworkTask Stack Remaining: 3136 words (3136 byte
 
 ---
 
-### 1.3 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.3 ภาพถ่ายหน้าจอการทดลอง (Screenshots)
+
+<div align="center">
+  <img src="./img/lab64_dashboard.png" width="300" alt="Dashboard Screenshot">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./img/lab64_api.png" width="300" alt="JSON API Screenshot">
+</div>
+
+---
+
+### 1.4 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
 
 <details open>
 <summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.4</b></summary>
@@ -846,15 +857,25 @@ I (11524) FORENSIC_STACK:   -> NetworkTask Stack Remaining: 3144 words (3144 byt
 
 | ลำดับที่ | ชื่อสมาร์ตโฟน / MAC Address  | ระดับ RSSI (dBm) | ระยะทางประเมิน (Near/Far) |               ผลการลงชื่อ (Passed/Rejected)                |
 | :------: | :--------------------------- | :--------------: | :-----------------------: | :--------------------------------------------------------: |
-|  **1**   | iPhone (`B6:60:07:99:8F:F9`) |    `-45 dBm`     |     **Near (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
-|  **2**   | iPad (`4A:83:4A:A5:B3:9E`)   |    `-48 dBm`     |     **Near (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
-|  **3**   | Device Out-of-Range          |    `-75 dBm`     |     **Far (Invalid)**     | <font color='red'><b>Rejected (ปฏิเสธการลงชื่อ)</b></font> |
+|  **1**   | `26:56:79:C2:53:FB` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
+|  **2**   | `92:70:76:1D:91:8C` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
+|  **3**   | `92:70:76:1D:91:8C` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
+|  **4**   | `FE:B2:E9:4F:14:E5` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
+|  **5**   | `26:56:79:C2:53:FB` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
 
 _(ทดสอบการสกัดดักจับ Event การเชื่อมต่อและประเมินเกณฑ์ RSSI Proximity ที่เกณฑ์ -60 dBm บน ESP32)_
 
 ---
 
-### 1.2 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
+### 1.2 ภาพถ่ายหน้าจอการทดลอง (Screenshot)
+
+<div align="center">
+  <img src="./img/lab65_dashboard.png" width="600" alt="Lab 6.5 Dashboard Screenshot">
+</div>
+
+---
+
+### 1.3 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
 
 <details open>
 <summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.5</b></summary>
