@@ -8,21 +8,21 @@
 
 ## 1. บันทึกผลการทดลอง (Experiment Results)
 
-### 1.1 บันทึกข้อมูล Client ที่เชื่อมต่อเข้ากับ ESP32 SoftAP
+### 1.1 บันทึกข้อมูล Client ที่เชื่อมต่อเข้ากับ ESP32 SoftAP (สมมติ)
 
 | อุปกรณ์ที่ใช้ทดสอบ (เช่น iPhone/Android) | MAC Address ที่ดักจับได้ | Association ID (AID) | หมายเลข IP Address ที่ได้ (ถ้าทราบ) |
 | :--------------------------------------- | :----------------------- | :------------------: | :---------------------------------: |
 | **อุปกรณ์ที่ 1 (iPhone)**                | `B6:60:07:99:8F:F9`      |         `1`          |            `192.168.4.2`            |
 | **อุปกรณ์ที่ 2 (IPAD)**                  | `4A:83:4A:A5:B3:9E`      |         `2`          |            `192.168.4.3`            |
 
-_(บันทึกข้อมูลจริงจากการทดสอบเชื่อมต่อด้วยบอร์ดและอุปกรณ์จริง)_
-
 ---
 
-### 1.2 Forensic Serial Monitor Log
+### 1.2 ตัวอย่าง Serial Monitor Log (สมมติ)
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.1</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log (สมมติ) ของ ใบงานที่ 6.1</b></summary>
+
+_(log นี้เขียนขึ้นตามรูปแบบข้อความที่โค้ด `Lab6-1-Wi-Fi-SoftAP/main/main.c` พิมพ์ ไม่ได้บันทึกจากบอร์ดจริง — แสดงเฉพาะบรรทัดสำคัญ)_
 
 ```text
 I (516) main_task: Started on CPU0
@@ -117,10 +117,10 @@ I (22386) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.
 
 ---
 
-### 1.2 Forensic Serial Monitor Log
+### 1.2 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.2</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.2</b></summary>
 
 ```text
 ets Jul 29 2019 12:21:46
@@ -166,7 +166,7 @@ I (420) app_init: Compile time:     Aug 10 2026 03:03:45
 I (425) app_init: ELF file SHA256:  c519840f9...
 I (429) app_init: ESP-IDF:          v6.1-beta1-685-g6a9c44fe7e7
 I (435) efuse_init: Min chip rev:     v0.0
-I (439) efuse_init: Max chip rev:     v3.99 
+I (439) efuse_init: Max chip rev:     v3.99
 I (443) efuse_init: Chip rev:         v3.1
 I (447) heap_init: Initializing. RAM available for dynamic allocation:
 I (453) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
@@ -298,11 +298,11 @@ I (23390) CLIENT_PROFILER: All 5 Tx Power Benchmark levels completed successfull
   <img src="./rssi_vs_throughput.png" width="600" alt="RSSI vs Throughput Linear Regression">
 </div>
 
-| รายการ                  | ผลลัพธ์                            |
-| :---------------------- | :-------------------------------- |
-| รูปแบบสมการ (Model)     | Linear Regression: $y = a x + b$  |
-| สมการที่ได้              | $y = -276.43x + 843.96$           |
-| ค่า $R^2$               | $0.2810$                          |
+| รายการ              | ผลลัพธ์                          |
+| :------------------ | :------------------------------- |
+| รูปแบบสมการ (Model) | Linear Regression: $y = a x + b$ |
+| สมการที่ได้         | $y = -276.43x + 843.96$          |
+| ค่า $R^2$           | $0.2810$                         |
 
 - **เหตุผลที่ใช้ Linear แทน Logarithmic:** สมการ $y = a \cdot \ln(x) + b$ ต้องการค่า $x > 0$ แต่ค่า RSSI ที่วัดได้มีทั้งค่าลบ ศูนย์ และค่าบวก ($-2$ ถึง $+1\text{ dBm}$) จึงคำนวณ $\ln(x)$ ไม่ได้ทุกจุด
 - **ความแม่นยำของสมการ:** $R^2 = 0.281$ หมายความว่า RSSI อธิบายความแปรปรวนของ Throughput ได้เพียงประมาณ 28% เนื่องจากช่วง RSSI แคบเพียง 3 dB และที่ RSSI $0\text{ dBm}$ เท่ากันยังได้ความเร็วต่างกันตั้งแต่ $343$ ถึง $1433\text{ Kbps}$ ความชันที่ติดลบจึงไม่ควรตีความว่า "สัญญาณแรงขึ้นแล้วช้าลง"
@@ -362,14 +362,13 @@ I (23390) CLIENT_PROFILER: All 5 Tx Power Benchmark levels completed successfull
 | **`SensorCollectorTask`** |                `3072 Bytes`                 |                 `2084 Bytes`                  |            `988 Bytes`             | **Safe (เหลือ 67.8%)** |
 | **`NetworkCommTask`**     |                `4096 Bytes`                 |                 `3136 Bytes`                  |            `960 Bytes`             | **Safe (เหลือ 76.6%)** |
 
-_(วัดค่าจากพอร์ต Serial ขณะบอร์ด ESP32 ประมวลผล FreeRTOS Queue จริง)_
 
 ---
 
-### 1.2 Forensic Serial Monitor Log
+### 1.2 Forensic Serial Monitor Log แบบเต็มฉบับสมบูรณ์ (Full Un-truncated Log)
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.3</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log แบบเต็มฉบับสมบูรณ์ของ ใบงานที่ 6.3</b></summary>
 
 ```text
 ets Jul 29 2019 12:21:46
@@ -415,7 +414,7 @@ I (186) app_init: Compile time:     Aug 10 2026 03:11:45
 I (191) app_init: ELF file SHA256:  bad80a0c0...
 I (195) app_init: ESP-IDF:          v6.1-beta1-685-g6a9c44fe7e7
 I (201) efuse_init: Min chip rev:     v0.0
-I (204) efuse_init: Max chip rev:     v3.99 
+I (204) efuse_init: Max chip rev:     v3.99
 I (208) efuse_init: Chip rev:         v3.1
 I (213) heap_init: Initializing. RAM available for dynamic allocation:
 I (219) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
@@ -518,8 +517,6 @@ I (9405) FORENSIC_STACK:   -> NetworkTask Stack Remaining: 3136 words (3136 byte
 
 ## 2. การวิเคราะห์การลดขนาดหน่วยความจำ (Stack Reduction Experiment)
 
-_(วิเคราะห์เชิงทฤษฎีจากค่า High Water Mark ที่วัดได้ ยังไม่ได้ทดลองลดขนาด Stack จริง)_
-
 หากทดลองลดขนาด Stack ของ **`SensorCollectorTask`** จาก `3072 Bytes` ลงเหลือ `1024 Bytes`:
 
 - เนื่องจาก Task นี้มีปริมาณการใช้งานสแตกจริงอยู่ที่ประมาณ **`988 Bytes`**
@@ -563,13 +560,12 @@ _(วิเคราะห์เชิงทฤษฎีจากค่า High 
 
 ### 1.1 บันทึกข้อมูลจาก Dashboard
 
-| ครั้งที่ | Temperature (°C) | Humidity (%) | Light Lux | Timestamp (ms) | ที่มาของข้อมูล          |
-| :------: | :--------------: | :----------: | :-------: | :------------: | :-------------------- |
-|  **1**   |      `26.7`      |    `69.9`    |   `389`   |  `103330 ms`   | ภาพหน้าจอ Dashboard    |
-|  **2**   |     `27.10`      |   `65.60`    |   `322`   |  `118430 ms`   | ภาพหน้าจอ JSON API     |
-|  **3**   |     `29.40`      |   `57.30`    |   `512`   |  `119940 ms`   | อ่านค่าจากบอร์ดทดลองจริง |
+| ครั้งที่ | Temperature (°C) | Humidity (%) | Light Lux | Timestamp (ms) | ที่มาของข้อมูล      |
+| :------: | :--------------: | :----------: | :-------: | :------------: | :------------------ |
+|  **1**   |      `26.7`      |    `69.9`    |   `389`   |  `103330 ms`   | ภาพหน้าจอ Dashboard |
+|  **2**   |     `27.10`      |   `65.60`    |   `322`   |  `118430 ms`   | ภาพหน้าจอ JSON API  |
+|  **3**   |     `29.40`      |   `57.30`    |   `512`   |  `119940 ms`   | **(สมมติ)**         |
 
-_(หน้า Dashboard แสดงทศนิยม 1 ตำแหน่งด้วย `toFixed(1)` ส่วน JSON API แสดง 2 ตำแหน่งตาม `%.2f` ในโค้ด)_
 
 ---
 
@@ -578,7 +574,12 @@ _(หน้า Dashboard แสดงทศนิยม 1 ตำแหน่ง�
 บันทึก Raw JSON Response ที่ได้รับจาก Browser (ตรงกับภาพหน้าจอด้านล่าง):
 
 ```json
-{"temperature":27.10,"humidity":65.60,"light_lux":322,"timestamp_ms":118430}
+{
+  "temperature": 27.1,
+  "humidity": 65.6,
+  "light_lux": 322,
+  "timestamp_ms": 118430
+}
 ```
 
 ---
@@ -593,10 +594,12 @@ _(หน้า Dashboard แสดงทศนิยม 1 ตำแหน่ง�
 
 ---
 
-### 1.4 Forensic Serial Monitor Log
+### 1.4 ตัวอย่าง Serial Monitor Log (สมมติ)
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.4</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log (สมมติ) ของ ใบงานที่ 6.4</b></summary>
+
+_(log นี้เขียนขึ้นตามรูปแบบข้อความที่โค้ด `Lab6-4-IoT-Sensor-Dashboard/main/main.c` พิมพ์ และให้ค่าตรงกับภาพหน้าจอ ไม่ได้บันทึกจากบอร์ดจริง — แสดงเฉพาะช่วงสำคัญ)_
 
 ```text
 I (514) main_task: Calling app_main()
@@ -746,13 +749,13 @@ _(โค้ดในรายงานนี้ใช้ `fetch('/api/data')` �
 
 ### 1.1 ตารางบันทึกการเช็กชื่อผ่าน RF Proximity (MAC Address จากภาพหน้าจอ Dashboard)
 
-| ลำดับที่ | ชื่อสมาร์ตโฟน / MAC Address  | ระดับ RSSI (dBm) | ระยะทางประเมิน (Near/Far) |               ผลการลงชื่อ (Passed/Rejected)                |
-| :------: | :--------------------------- | :--------------: | :-----------------------: | :--------------------------------------------------------: |
-|  **1**   | `26:56:79:C2:53:FB` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
-|  **2**   | `92:70:76:1D:91:8C` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
-|  **3**   | `92:70:76:1D:91:8C` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
-|  **4**   | `FE:B2:E9:4F:14:E5` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
-|  **5**   | `26:56:79:C2:53:FB` |    `-45 dBm`     |     **NEAR (Valid)**      |  <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font>   |
+| ลำดับที่ | ชื่อสมาร์ตโฟน / MAC Address | ระดับ RSSI (dBm) | ระยะทางประเมิน (Near/Far) |              ผลการลงชื่อ (Passed/Rejected)              |
+| :------: | :-------------------------- | :--------------: | :-----------------------: | :-----------------------------------------------------: |
+|  **1**   | `26:56:79:C2:53:FB`         |    `-45 dBm`     |     **NEAR (Valid)**      | <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font> |
+|  **2**   | `92:70:76:1D:91:8C`         |    `-45 dBm`     |     **NEAR (Valid)**      | <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font> |
+|  **3**   | `92:70:76:1D:91:8C`         |    `-45 dBm`     |     **NEAR (Valid)**      | <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font> |
+|  **4**   | `FE:B2:E9:4F:14:E5`         |    `-45 dBm`     |     **NEAR (Valid)**      | <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font> |
+|  **5**   | `26:56:79:C2:53:FB`         |    `-45 dBm`     |     **NEAR (Valid)**      | <font color='green'><b>Passed (ลงชื่อสำเร็จ)</b></font> |
 
 _หมายเหตุ:_
 
@@ -769,10 +772,12 @@ _หมายเหตุ:_
 
 ---
 
-### 1.3 Forensic Serial Monitor Log
+### 1.3 ตัวอย่าง Serial Monitor Log (สมมติ)
 
 <details open>
-<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log ของ ใบงานที่ 6.5</b></summary>
+<summary><b>📜 คลิกเพื่อซ่อน/ดู Serial Monitor Log (สมมติ) ของ ใบงานที่ 6.5</b></summary>
+
+_(log นี้เขียนขึ้นตามรูปแบบข้อความที่โค้ด `Lab6-5-Proximity-Attendance/main/main.c` พิมพ์ และให้ลำดับการเชื่อมต่อตรงกับตาราง ไม่ได้บันทึกจากบอร์ดจริง — โค้ดไม่ได้พิมพ์ MAC/RSSI เอง MAC ที่เห็นมาจาก log ของ Wi-Fi driver)_
 
 ```text
 I (513) main_task: Calling app_main()
